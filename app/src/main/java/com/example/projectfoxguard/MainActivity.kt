@@ -3,6 +3,7 @@ package com.example.projectfoxguard
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,8 +15,16 @@ import com.example.projectfoxguard.databinding.ActivityMainBinding
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
-
+// %use dataframe
+import java.sql.DriverManager
+import java.sql.PreparedStatement
+import java.sql.SQLException
+import java.util.*
 class MainActivity : AppCompatActivity() {
+
+    private var ConnectionHelper = ConnectionHelper()
+
+    //val dbConfig = DatabaseConfiguration(URL, USER_NAME, PASSWORD)
     private val requestPermissionLauncher=
         registerForActivityResult(ActivityResultContracts.RequestPermission()){
             isGranted: Boolean ->
@@ -42,7 +51,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun setResult(string: String){
         binding.textResult.text = string
+        val scannedData: String = string
+        val connection = ConnectionHelper.DBConnection()
+        if(connection!=null) {
+            try {
+                val matricula: PreparedStatement = ConnectionHelper.DBConnection()
+                    ?.prepareStatement("SELECT top 1 * FROM ATTENDEES WHERE attendeeId =$scannedData ")!!
 
+                matricula.executeQuery()
+                Toast.makeText(this, "Estudiante ENCONTRADO", Toast.LENGTH_SHORT).show()
+
+                //val asistencia: PreparedStatement = ConnectionHelper.DBConnection()?.prepareStatement("INSERT INTO ATTENDANCE ")
+            } catch (ex: SQLException) {
+                Toast.makeText(this, "Estudiante NO ENCONTRADO", Toast.LENGTH_SHORT).show()
+                Log.e("Error: ", ex.message.toString())
+            }
+        }else{
+            Toast.makeText(this, "Database connection not available", Toast.LENGTH_SHORT).show()
+        }
     }
     private fun showCamera() {
         val options = ScanOptions()
@@ -56,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         scanLauncher.launch(options)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,6 +93,10 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
+
     }
 
     private fun initViews() {
