@@ -16,14 +16,13 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
 // %use dataframe
-import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.SQLException
 import java.util.*
-class MainActivity : AppCompatActivity() {
+class StaffScan : AppCompatActivity() {
 
     private var ConnectionHelper = ConnectionHelper()
-
+    private val usertype=0
     //val dbConfig = DatabaseConfiguration(URL, USER_NAME, PASSWORD)
     private val requestPermissionLauncher=
         registerForActivityResult(ActivityResultContracts.RequestPermission()){
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 matricula.executeQuery()
                 Toast.makeText(this, "Estudiante ENCONTRADO", Toast.LENGTH_SHORT).show()
 
-                //val asistencia: PreparedStatement = ConnectionHelper.DBConnection()?.prepareStatement("INSERT INTO ATTENDANCE ")
+               // val asistencia: PreparedStatement = ConnectionHelper.DBConnection()?.prepareStatement("INSERT INTO ATTENDANCE ")
             } catch (ex: SQLException) {
                 Toast.makeText(this, "Estudiante NO ENCONTRADO", Toast.LENGTH_SHORT).show()
                 Log.e("Error: ", ex.message.toString())
@@ -95,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+        val ss:String = intent.getStringExtra("USER").toString()
 
     }
 
