@@ -26,7 +26,7 @@ public class UserView extends AppCompatActivity {
 
     public void toQR(View view){
         Intent intent = new Intent(this, qrGenerator.class);
-        //intent.putExtra("DB DATA");
+        intent.putExtra("Matricula", "36026");
         startActivity(intent);
     }
 }

@@ -61,4 +61,23 @@
         app:layout_constraintTop_toTopOf="@+id/layout_result"
         app:tint="@android:color/white" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="146dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+         />
+
+    <TextView
+
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECCIONE EVENTO"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:textStyle="bold"
+        />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

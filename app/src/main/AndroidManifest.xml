@@ -22,6 +22,9 @@
         android:theme="@style/Theme.ProjectFoxGuard"
         tools:targetApi="31">
         <activity
+            android:name=".UserScan"
+            android:exported="false" />
+        <activity
             android:name=".UserView"
             android:exported="false" />
         <activity
