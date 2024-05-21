@@ -10,8 +10,8 @@ public class ConnectionHelper {
        private val database = "FoxGuard"
         private val uname = "sa"
         private val pass = "zc0w8j2m"
-
-        private val ip = "192.168.0.13:1433"
+        private val ipcetys = "10.4.76.195"
+        private val ip = "192.168.0.5:1433"
 
         fun DBConnection(): Connection?{
 
