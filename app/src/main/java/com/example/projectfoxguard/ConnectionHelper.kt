@@ -11,7 +11,7 @@ public class ConnectionHelper {
         private val uname = "sa"
         private val pass = "zc0w8j2m"
         private val ipcetys = "10.4.76.195"
-        private val ip = "192.168.0.5:1433"
+        private val ip = "192.168.0.11:1433"
 
         fun DBConnection(): Connection?{
 

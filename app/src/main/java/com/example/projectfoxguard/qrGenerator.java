@@ -31,8 +31,9 @@ public class qrGenerator extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.qr_code);
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        String matr = getIntent().getStringExtra( "Matricula");
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(getIntent().getDataString(), BarcodeFormat.QR_CODE,300,300);
+            BitMatrix bitMatrix = multiFormatWriter.encode(matr, BarcodeFormat.QR_CODE,300,300);
 
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);

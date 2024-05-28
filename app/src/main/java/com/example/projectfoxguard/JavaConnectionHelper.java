@@ -11,7 +11,7 @@ public class JavaConnectionHelper {
     private String pass = "zc0w8j2m";
 
     private  String ipcetys = "10.4.76.195:1433";
-    private String ip = "192.168.0.5:1433";
+    private String ip = "192.168.0.11:1433";
 
     // Connect to your database.
     // Replace server name, username, and password with your credentials

@@ -26,7 +26,8 @@ public class UserView extends AppCompatActivity {
 
     public void toQR(View view){
         Intent intent = new Intent(this, qrGenerator.class);
-        intent.putExtra("Matricula", "36026");
+        //int StudentId= Integer.parseInt(getIntent().getStringExtra("StudentId"));
+        intent.putExtra("Matricula", getIntent().getStringExtra("StudentId"));
         startActivity(intent);
     }
 }

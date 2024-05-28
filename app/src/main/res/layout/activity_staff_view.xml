@@ -13,16 +13,29 @@
         android:layout_width="193dp"
         android:layout_height="79dp"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:text="REGISTRAR EVENTO" />
+        android:layout_marginTop="100dp"
+        android:text="REGISTRAR EVENTO"
+        android:onClick="CrudView"
+        />
 
     <Button
         android:id="@+id/Attendance"
         android:layout_width="wrap_content"
         android:layout_height="79dp"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:onClick="scanQR"
         android:text="REGISTRAR ASISTENCIA" />
+
+    <Button
+        android:id="@+id/ViewEvents"
+        android:layout_width="193dp"
+        android:layout_height="79dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="VER EVENTOS"
+        android:onClick="ViewEvents"
+        />
+
 </LinearLayout>
 

@@ -20,6 +20,15 @@ class StaffView : AppCompatActivity() {
         }
     }
 
+    fun ViewEvents(view: View?){
+        val intent = Intent(this, EventsDisplay::class.java)
+        startActivity(intent)
+    }
+    fun CrudView(view: View?){
+        val intent = Intent(this, CrudView::class.java)
+        startActivity(intent)
+    }
+
     fun scanQR(view: View?) {
         val intent = Intent(this, StaffScan::class.java)
         intent.putExtra("USER",0)

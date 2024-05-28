@@ -22,6 +22,12 @@
         android:theme="@style/Theme.ProjectFoxGuard"
         tools:targetApi="31">
         <activity
+            android:name=".EventsDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".CrudView"
+            android:exported="false" />
+        <activity
             android:name=".UserScan"
             android:exported="false" />
         <activity
