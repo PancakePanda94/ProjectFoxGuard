@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 public class JavaConnectionHelper {
     private String database = "FoxGuard";
-    private String uname = "sa";
-    private String pass = "zc0w8j2m";
+    private String uname = "Android_ADMIN";
+    private String pass = "1234";
 
     private  String ipcetys = "10.4.76.195:1433";
-    private String ip = "192.168.0.11:1433";
+    private String ip = "192.168.100.7:1433";
 
     // Connect to your database.
     // Replace server name, username, and password with your credentials
