@@ -2,43 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="8dp">
 
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:id="@+id/eventButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Info"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:background = "@drawable/roundedbutton"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="8dp"
+        android:onClick="buttonClick"
+        />
 
-    <TextView
+    <!--
+    <Button
         android:id="@+id/textViewEventId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event ID" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewEventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Name" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewEventType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Type" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewEventLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Location" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewEventDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Date" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewEventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Event Description" />
+
+       -->
 </LinearLayout>

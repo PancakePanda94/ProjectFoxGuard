@@ -23,6 +23,6 @@
         android:layout_height="79dp"
         android:layout_gravity="center"
         android:layout_marginTop="200dp"
-        android:onClick="scanQR"
+        android:onClick="exitScan"
         android:text="REGISTRAR SALIDA" />
 </LinearLayout>

@@ -37,7 +37,7 @@ class EventsDisplay : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Initialize adapter with empty dataList and set it to RecyclerView
-        adapter = ItemAdapter(dataList)
+        adapter = ItemAdapter(dataList,this)
         recyclerView.adapter = adapter
 
         // Fetch data from SQL server

@@ -85,7 +85,7 @@ dependencies {
     implementation(libs.core)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     implementation("androidx.multidex:multidex:2.0.1")
-
+    implementation("com.google.android.material:material:1.0.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
 
 }

@@ -1,5 +1,7 @@
 package com.example.projectfoxguard
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -13,24 +15,27 @@ import androidx.core.view.WindowInsetsCompat
 import net.sourceforge.jtds.jdbc.DateTime
 import java.sql.PreparedStatement
 import java.sql.SQLException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 
 
 class CrudView : AppCompatActivity() {
     //Variables for Inputs
-    lateinit var boxId: EditText
+
     lateinit var boxName:EditText
     lateinit var boxType: EditText
-    lateinit var boxDate:EditText
+
     lateinit var boxLocation: EditText
     lateinit var boxDescription:EditText
-
+    private lateinit var editTextEventDate: Button
+    private lateinit var editTextEventTime: Button
     //Variables for buttons
     lateinit var Addbtn: Button
-    lateinit var Deletebtn: Button
-    lateinit var Updatebtn: Button
-    lateinit var Searchbtn:Button
+    private var eventDateTime: Calendar = Calendar.getInstance()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,19 +48,26 @@ class CrudView : AppCompatActivity() {
         }
 
         //Variables for user input  (EventId, eventNames, eventType, eventDate, EventLocation, eventDescription)
-        boxId = findViewById(R.id.editTextID)
+        //boxId = findViewById(R.id.editTextID)
+        editTextEventDate = findViewById(R.id.btnDatePicker)
+        editTextEventTime = findViewById(R.id.btnTimePicker)
         boxName = findViewById(R.id.editTextName)
         boxType = findViewById(R.id.editTextType)
-        boxDate = findViewById(R.id.editTextDate)
+       // boxDate = findViewById(R.id.editTextDate)
         boxLocation = findViewById(R.id.editTextLocation)
         boxDescription = findViewById(R.id.editTextDesc)
 
         //Variables for Buttons (Add, Delete, Update, and Search)
         Addbtn = findViewById(R.id.btnAdd)
-        Deletebtn = findViewById(R.id.btnDelete)
-        Updatebtn = findViewById(R.id.btnUpdate)
+        val btnDatePicker: Button = findViewById(R.id.btnDatePicker)
+        val btnTimePicker: Button = findViewById(R.id.btnTimePicker)
 
-
+        btnDatePicker.setOnClickListener {
+            showDatePickerDialog()
+        }
+        btnTimePicker.setOnClickListener {
+            showTimePickerDialog()
+        }
         //Add a New Event to the Data Base
         Addbtn.setOnClickListener{
             val connection = ConnectionHelper()
@@ -66,18 +78,21 @@ class CrudView : AppCompatActivity() {
                     val eventName = boxName.text.toString()
                     val eventType = boxType.text.toString()
                     val eventLocation = boxLocation.text.toString()
-                    val eventDate = boxDate.text.toString()
+
                     val inputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
                     val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
+
+                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                    val sqlFormattedDate = sdf.format(eventDateTime.time)
                     // Parse the input date string to a LocalDate object
-                    val parsedDate = LocalDate.parse(eventDate, inputFormatter)
+                    //val parsedDate = LocalDate.parse(eventDate, inputFormatter)
 
                     // Convert the LocalDate to a LocalDateTime
-                    val parsedDateTime = parsedDate.atStartOfDay()
+                    //val parsedDateTime = parsedDate.atStartOfDay()
 
                     // Format the LocalDateTime object to the desired output format
-                    val sqlFormattedDate = parsedDateTime.format(outputFormatter)
+                    //val sqlFormattedDate = parsedDateTime.format(outputFormatter)
 
                     val eventDescription = boxDescription.text.toString()
 
@@ -102,86 +117,37 @@ class CrudView : AppCompatActivity() {
             }
         }
 
-        Deletebtn.setOnClickListener{
-            val connection = ConnectionHelper()
-            if (connection!=null) {
-                try {
-                    val eventId = boxId.text.toString().toIntOrNull() // Convert input to Int
-
-                    if (eventId != null) {
-                        val deleteEvent: PreparedStatement? = connection.DBConnection()?.prepareStatement("DELETE FROM EVENTSINFO WHERE EventId = ?")
-                        if (deleteEvent != null) {
-                            deleteEvent.setInt(1, eventId)
-                        }
-                        val rowsAffected = deleteEvent?.executeUpdate()
-
-                        if (rowsAffected != null) {
-                            if (rowsAffected > 0) {
-                                Toast.makeText(this, "Event has been deleted successfully", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(this, "No event found with the provided ID", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    } else {
-                        Toast.makeText(this, "Please enter a valid Event ID", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (ex: SQLException) {
-                    Toast.makeText(this, "Deletion Error: ${ex.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        Updatebtn.setOnClickListener{
-            val connection = ConnectionHelper()
-            if(connection!=null) {
-                try {
-                    val eventId = boxId.text.toString().toIntOrNull()
-                    //SQL validation
-                    val AddEvent: PreparedStatement = connection.DBConnection()?.prepareStatement("UPDATE EVENTSINFO SET EventName = ?, EventType = ?, EventLocation = ?, EventDate = ?, EventDescription = ? WHERE EventID = ?")!!
-                    val eventName = boxName.text.toString()
-                    val eventType = boxType.text.toString()
-                    val eventLocation = boxLocation.text.toString()
-                    val eventDate = boxDate.text.toString()
-                    val inputFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
-                    val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-
-                    // Parse the input date string to a LocalDate object
-                    val parsedDate = LocalDate.parse(eventDate, inputFormatter)
-
-                    // Convert the LocalDate to a LocalDateTime
-                    val parsedDateTime = parsedDate.atStartOfDay()
-
-                    // Format the LocalDateTime object to the desired output format
-                    val sqlFormattedDate = parsedDateTime.format(outputFormatter)
-
-                    val eventDescription = boxDescription.text.toString()
-
-                    AddEvent.setString(1, eventName)
-                    AddEvent.setString(2, eventType)
-                    AddEvent.setString(3, eventLocation)
-                    AddEvent.setString(4, sqlFormattedDate)
-                    AddEvent.setString(5, eventDescription)
-
-                    if (eventId != null) {
-                        AddEvent.setInt(6, eventId)
-                    }
-                    //Content to be added
-                    //AddEvent.setString(2, boxName.text.toString())
-                    //AddEvent.setString(3, boxType.text.toString())
-                    //AddEvent.setString(4, boxDate.text.toString())
-                    //AddEvent.setString(5, boxLocation.text.toString())
-                    //AddEvent.setString(6, boxDescription.text.toString())
-                    AddEvent.executeUpdate()
-
-                    Toast.makeText(this, "Event Has been updated successfully", Toast.LENGTH_SHORT)
-                        .show()
-                } catch (ex: SQLException) {
-                    Toast.makeText(this, "Update Error : ${ex.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
 
     }
 
+    private fun showDatePickerDialog() {
+        val year = eventDateTime.get(Calendar.YEAR)
+        val month = eventDateTime.get(Calendar.MONTH)
+        val day = eventDateTime.get(Calendar.DAY_OF_MONTH)
 
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            eventDateTime.set(Calendar.YEAR, selectedYear)
+            eventDateTime.set(Calendar.MONTH, selectedMonth)
+            eventDateTime.set(Calendar.DAY_OF_MONTH, selectedDay)
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            editTextEventDate.setText(sdf.format(eventDateTime.time))
+        }, year, month, day)
+
+        datePickerDialog.show()
+    }
+
+    private fun showTimePickerDialog() {
+        val hour = eventDateTime.get(Calendar.HOUR_OF_DAY)
+        val minute = eventDateTime.get(Calendar.MINUTE)
+
+        val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
+            eventDateTime.set(Calendar.HOUR_OF_DAY, selectedHour)
+            eventDateTime.set(Calendar.MINUTE, selectedMinute)
+            val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            //editTextEventDate.append(" " + sdf.format(eventDateTime.time))
+            editTextEventTime.setText(sdf.format(eventDateTime.time))
+        }, hour, minute, true)
+
+        timePickerDialog.show()
+    }
 }

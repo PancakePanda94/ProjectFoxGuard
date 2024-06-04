@@ -30,4 +30,11 @@ public class UserView extends AppCompatActivity {
         intent.putExtra("Matricula", getIntent().getStringExtra("StudentId"));
         startActivity(intent);
     }
+
+    public void exitScan(View view){
+        Intent intent = new Intent(this, UserScan.class);
+        //int StudentId= Integer.parseInt(getIntent().getStringExtra("StudentId"));
+        intent.putExtra("Matricula", getIntent().getStringExtra("StudentId"));
+        startActivity(intent);
+    }
 }

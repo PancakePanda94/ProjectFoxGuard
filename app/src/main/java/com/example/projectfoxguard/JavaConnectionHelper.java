@@ -10,8 +10,8 @@ public class JavaConnectionHelper {
     private String uname = "sa";
     private String pass = "zc0w8j2m";
 
-    private  String ipcetys = "10.4.76.195:1433";
-    private String ip = "192.168.0.11:1433";
+    private  String ipcetys = "10.4.94.111:1433";
+    private String ip = "192.168.0.6:1433";
 
     // Connect to your database.
     // Replace server name, username, and password with your credentials
@@ -23,7 +23,7 @@ public class JavaConnectionHelper {
         Connection conn = null;
         try {
             Class.forName(classes);
-            String connString= "jdbc:jtds:sqlserver://"+ip+";databaseName="+database;
+            String connString= "jdbc:jtds:sqlserver://"+ipcetys+";databaseName="+database;
             DriverManager.setLoginTimeout(10);
             conn = DriverManager.getConnection(connString,uname,pass);
         }

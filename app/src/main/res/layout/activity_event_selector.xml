@@ -5,10 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserScan">
-
-
-
+    tools:context=".eventSelector">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layout_result"
@@ -19,23 +16,34 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <!-- tools:layout_editor_absoluteX="155dp"
-         tools:layout_editor_absoluteY="325dp" -->
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/qrcode_scan" />
-
-        <TextView
-            android:id="@+id/textResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
+    <!-- tools:layout_editor_absoluteX="155dp"
+     tools:layout_editor_absoluteY="325dp" -->
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Spinner
+        android:id="@+id/EventSpinner"
+        android:layout_width="146dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        />
+
+
+    <TextView
+
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECCIONE EVENTO"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:textStyle="bold"
+        />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -61,10 +69,7 @@
         app:layout_anchor="@id/bottomAppBar"
         app:layout_constraintStart_toStartOf="@+id/layout_result"
         app:layout_constraintTop_toTopOf="@+id/layout_result"
-        app:tint="@android:color/white" />
-
-
-
-
-
+        app:tint="@android:color/white"
+        android:onClick="toQR"
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

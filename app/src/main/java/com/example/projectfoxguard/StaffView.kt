@@ -35,4 +35,8 @@ class StaffView : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun exitQR(view: View?) {
+        val intent = Intent(this, eventSelector::class.java)
+        startActivity(intent)
+    }
 }

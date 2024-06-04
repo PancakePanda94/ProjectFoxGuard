@@ -13,7 +13,7 @@
         android:layout_width="193dp"
         android:layout_height="79dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:text="REGISTRAR EVENTO"
         android:onClick="CrudView"
         />
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="79dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:onClick="scanQR"
         android:text="REGISTRAR ASISTENCIA" />
 
@@ -35,6 +35,16 @@
         android:layout_marginTop="100dp"
         android:text="VER EVENTOS"
         android:onClick="ViewEvents"
+        />
+
+    <Button
+        android:id="@+id/ExitQR"
+        android:layout_width="193dp"
+        android:layout_height="79dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="75dp"
+        android:text="QR Salida"
+        android:onClick="exitQR"
         />
 
 </LinearLayout>
